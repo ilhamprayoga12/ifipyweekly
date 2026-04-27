@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Tambah Data Mahasiswa</h2>
+    <form action="mahasiswa.html" method="post">
+        <table>
+        <tr>
+            <td><label for="nama">Nama</label></td>
+            <td>:</td>
+            <td><input type ="text" id="Nama" name="nama" /></td>
+        </tr>
+        <tr>
+            <td><label for="photo">Foto</label></td>
+            <td>:</td>
+            <td><input type ="file" id="photo" name="photo" /></td>
+        </tr>
+        <tr>
+            <td><label for="UTS">UTS</label></td>
+            <td>:</td>
+            <td><input type ="number" id="UTS" name="UTS" /></td>
+        </tr>
+        <tr>
+            <td><label for="UAS">UAS</label></td>
+            <td>:</td>
+            <td><input type ="number" id="UAS" name="UAS" /></td>
+        </tr>
+        <tr>
+            <td><label for="tugas">Tugas</label></td>
+            <td>:</td>
+            <td><input type ="number" id="tugas" name="tugas" /></td>
+        </tr>
+        </table>
+    </form>
+    <a href="tambahdata.html">
+        <button>Sumbit</button>
+        <br>
+        <hr/>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Mahasiswa</title>
+   <style>
+    body {
+        font-family: Arial;
+    }
+
+    table {
+        border-spacing: 10px;
+    }
+
+    input, textarea, select {
+        padding: 5px;
+        width: 200px;
+    }
+
+    textarea {
+        height: 60px;
+    }
+
+    /* 🔥 TAMBAHAN PERBAIKAN */
+    label {
+        color: black;
+        text-decoration: none;
+        font-weight: normal;
+    }
+</style>
+</head>
+<body>
+
+<form action="mahasiswa.html" method="post" enctype="multipart/form-data">
+    <table>
+
+        <tr>
+            <td><label for="nama">Nama</label></td>
+            <td>:</td>
+            <td><input type="text" id="nama" name="nama" placeholder="Masukkan nama" required></td>
+        </tr>
+
+        <tr>
+            <td><label for="nim">NIM</label></td>
+            <td>:</td>
+            <td><input type="number" id="nim" name="nim" placeholder="Masukkan NIM" required></td>
+        </tr>
+
+        <tr>
+            <td><label for="password">Password</label></td>
+            <td>:</td>
+            <td><input type="password" id="password" name="password" required></td>
+        </tr>
+
+        <tr>
+            <td><label for="email">Email</label></td>
+            <td>:</td>
+            <td><input type="email" id="email" name="email" placeholder="contoh@email.com" required></td>
+        </tr>
+
+        <tr>
+            <td><label for="nohp">No HP</label></td>
+            <td>:</td>
+            <td><input type="tel" id="nohp" name="nohp" placeholder="08xxxxxxxxxx" required></td>
+        </tr>
+
+        <tr>
+            <td><label for="website">Website</label></td>
+            <td>:</td>
+            <td><input type="url" id="website" name="website" placeholder="https://"></td>
+        </tr>
+
+        <tr>
+            <td><label for="tgl">Tanggal Lahir</label></td>
+            <td>:</td>
+            <td><input type="date" id="tgl" name="tgl_lahir" required></td>
+        </tr>
+
+        <tr>
+            <td><label for="warna">Warna Favorit</label></td>
+            <td>:</td>
+            <td><input type="color" id="warna" name="warna"></td>
+        </tr>
+
+        <tr>
+            <td><label for="kepuasan">Tingkat Kepuasan</label></td>
+            <td>:</td>
+            <td><input type="range" id="kepuasan" name="kepuasan" min="0" max="100" value="50"></td>
+        </tr>
+
+        <tr>
+            <td>Jenis Kelamin</td>
+            <td>:</td>
+            <td>
+                <input type="radio" id="laki" name="jk" value="L" required>
+                <label for="laki">Laki-laki</label>
+
+                <input type="radio" id="perempuan" name="jk" value="P">
+                <label for="perempuan">Perempuan</label>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Hobi</td>
+            <td>:</td>
+            <td>
+                <input type="checkbox" id="membaca" name="hobi[]" value="Membaca">
+                <label for="membaca">Membaca</label>
+
+                <input type="checkbox" id="gaming" name="hobi[]" value="Gaming">
+                <label for="gaming">Gaming</label>
+
+                <input type="checkbox" id="olahraga" name="hobi[]" value="Olahraga">
+                <label for="olahraga">Olahraga</label>
+            </td>
+        </tr>
+
+        <tr>
+            <td><label for="foto">Upload Foto</label></td>
+            <td>:</td>
+            <td><input type="file" id="foto" name="foto" required></td>
+        </tr>
+
+        <tr>
+            <td><label for="alamat">Alamat</label></td>
+            <td>:</td>
+            <td><textarea id="alamat" name="alamat" placeholder="Masukkan alamat" required></textarea></td>
+        </tr>
+
+        <tr>
+            <td><label for="jurusan">Jurusan</label></td>
+            <td>:</td>
+            <td>
+                <select id="jurusan" name="jurusan" required>
+                    <option value="">-- Pilih Jurusan --</option>
+                    <option value="TI">Teknik Informatika</option>
+                    <option value="SI">Sistem Informasi</option>
+                    <option value="MI">Manajemen Informatika</option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="3" align="center">
+                <button type="submit">Submit</button>
+            </td>
+        </tr>
+
+    </table>
+</form>
+
+</body>
+</html>
