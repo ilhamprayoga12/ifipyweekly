@@ -7,7 +7,7 @@
 </head>
 <body>
     <h2>Tambah Data Mahasiswa</h2>
-    <form action="mahasiswa.html" method="post">
+    <form action="mahasiswaphp" method="post">
         <table>
         <tr>
             <td><label for="nama">Nama</label></td>
@@ -36,7 +36,7 @@
         </tr>
         </table>
     </form>
-    <a href="tambahdata.html">
+    <a href="tambahdataphp">
         <button>Sumbit</button>
         <br>
         <hr/>
@@ -72,7 +72,7 @@
 </head>
 <body>
 
-<form action="mahasiswa.html" method="post" enctype="multipart/form-data">
+<form action="mahasiswaphp" method="post" enctype="multipart/form-data">
     <table>
 
         <tr>

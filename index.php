@@ -10,10 +10,10 @@
         <h1>INFORMATIKA 2026</h1>
         <table border="1" cellspacing="0" cellpadding="10px">
             <tr>
-                <td><a href="index.html">Home</a></td>
-                <td><a href="profile.html">Profile</a></td>
-                <td><a href="contact.html">Contact</a></td>
-                <td><a href="mahasiswa.html">Data Mahasiswa</a></td>
+                <td><a href="indexphp">Home</a></td>
+                <td><a href="profilephp">Profile</a></td>
+                <td><a href="contactphp">Contact</a></td>
+                <td><a href="mahasiswaphp">Data Mahasiswa</a></td>
             </tr>
         </table>
 
