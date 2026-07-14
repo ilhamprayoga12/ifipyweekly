@@ -1,89 +1,125 @@
+<?php
+// ============================================
+// FILE: mahasiswa.php
+// FUNGSI: Menampilkan data mahasiswa (dari database)
+// ============================================
+
+require 'fungsi.php';
+cek_login();
+// Ambil semua data mahasiswa
+$mahasiswas = tampildata("SELECT * FROM mahasiswa");
+$total_mahasiswa = hitungdata('mahasiswa');
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Mahasiswa Informatika</title>
+    <title>Data Mahasiswa - Informatika</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-     <table border="1" cellspacing="0" cellpadding="10px">
-            <tr>
-                <td><a href="indexphp">Home</a></td>
-                <td><a href="profilephp">Profile</a></td>
-                <td><a href="contactphp">Contact</a></td>
-                <td><a href="mahasiswaphp">Data Mahasiswa</a></td>
-            </tr>
-        </table>
-        <br>
-        <hr/>
-        <h2>Data Mahasiswa</h2>
-        <a href="tambahdataphp">
-            <button>Tamabah Data</button>
-        </a>
-        <table border="1" cellspacing="10px">
-            <tr>
-                <th rowspan="2">No</th>
-                <th rowspan="2">Nama</th>
-                <th colspan="3">Nilai</th>
-            </tr>
-            <tr>
-                <th> UTS</th>
-                <th> UAS</th>
-                <th> TUGAS</th>
-            </tr>
-            <tr>
-                <td align="center">1</td>
-                <td>Beruang</td>
-                <td><img src="aset/beruang.jpg" alt="foto" width="60px"></td>
-                <td align="center">90</td>
-                <td align="center">85</td>
-                <td align="center">40</td>
-            </tr>
-             <tr>
-                <td align="center">1</td>
-                <td>Kangguru</td>
-                <td><img src="aset/kangguru.jpg" alt="foto" width="60px"></td>
-                <td align="center">90</td>
-                <td align="center">85</td>
-                <td align="center">40</td>
-            </tr>
-             <tr>
-                <td align="center">1</td>
-                <td>Singa</td>
-                <td><img src="aset/singa.jpg" alt="foto" width="60px"></td>
-                <td align="center">90</td>
-                <td align="center">85</td>
-                <td align="center">40</td>
-            </tr>
-        </table>
-        <br>
-        <hr>
-        <table border="1" cellspacing="0" cellpadding="10px">
-            <tr>
-                <td>1,1</td>
-                <td>1,2</td>
-                <td>1,3</td>
-                <td>1,4</td>
-            </tr>
-            <tr>
-                <td>2,1</td>
-                <td align="center" colspan="2" rowspan="2" class="center-cell">?</td>
-                <td>2,4</td>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-users"></i> DATA MAHASISWA</h1>
+            <p>Nilai UTS, UAS, dan Tugas Mahasiswa Informatika</p>
+        </div>
 
-            </tr>
-            <tr>
-                <td>3,1</td>
-                <td>3,4</td>
-            </tr>
-            <tr>
-                <td>4,1</td>
-                <td>4,2</td>
-                <td>4,3</td>
-                <td>4,4</td>
-            </tr>
-        </table>
-        <br>
-        <hr>
+        <!-- NAVIGASI -->
+        <div class="navbar">
+            <a href="index.php"><i class="fas fa-home"></i> Home</a>
+            <a href="profile.php"><i class="fas fa-user-graduate"></i> Profile</a>
+            <a href="contact.php"><i class="fas fa-envelope"></i> Contact</a>
+            <a href="mahasiswa.php"><i class="fas fa-table"></i> Data Mahasiswa</a>
+        </div>
 
+        <div class="content">
+            <!-- STATISTIK -->
+            <div class="stats-container">
+                <div class="stat-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <i class="fas fa-users" style="font-size: 2.5em; margin-bottom: 10px;"></i>
+                    <h3><?= $total_mahasiswa; ?></h3>
+                    <p>Total Mahasiswa</p>
+                </div>
+            </div>
+
+            <!-- TOOLBAR -->
+            <div class="toolbar">
+                <a href="tambahdata.php" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Tambah Data
+                </a>
+                <div style="display: flex; gap: 10px;">
+                    <div class="search-wrapper">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" id="searchInput" class="search-box" placeholder="Cari data..." onkeyup="searchData()">
+                    </div>
+                    <button onclick="exportToCSV()" class="btn btn-primary">
+                        <i class="fas fa-download"></i> Export CSV
+                    </button>
+                </div>
+            </div>
+
+            <!-- ALERT SUKSES -->
+            <?php if (isset($_GET['success'])): ?>
+                <div class="alert alert-success">
+                    <i class="fas fa-check-circle"></i> <?= htmlspecialchars($_GET['success']) ?>
+                </div>
+            <?php endif; ?>
+
+            <!-- TABEL DATA -->
+            <div class="table-wrapper">
+                <table class="data-table" id="dataTable">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Foto</th>
+                            <th>Nama</th>
+                            <th>UTS</th>
+                            <th>UAS</th>
+                            <th>Tugas</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $no = 1; ?>
+                        <?php foreach ($mahasiswas as $mhs) : ?>
+                        <tr>
+                            <td data-label="No"><?= $no++; ?></td>
+                            <td data-label="Foto">
+                                <?php if ($mhs['foto'] && file_exists("assets/images/" . $mhs['foto'])): ?>
+                                    <img src="assets/images/<?= $mhs['foto']; ?>" class="foto-mahasiswa" alt="Foto" width="60px">
+                                <?php else: ?>
+                                    <img src="assets/images/default.png" class="foto-mahasiswa" alt="No Image" width="60px">
+                                <?php endif; ?>
+                            </td>
+                            <td data-label="Nama"><strong><?= htmlspecialchars($mhs['nama']); ?></strong></td>
+                            <td data-label="UTS" align="center"><?= htmlspecialchars($mhs['uts']); ?></td>
+                            <td data-label="UAS" align="center"><?= htmlspecialchars($mhs['uas']); ?></td>
+                            <td data-label="Tugas" align="center"><?= htmlspecialchars($mhs['tugas']); ?></td>
+                            <td data-label="Aksi" class="action-buttons">
+                                <a href="editdata.php?id=<?= $mhs['id']; ?>" class="btn btn-edit">
+                                    <i class="fas fa-edit"></i> Edit
+                                </a>
+                                <a href="hapusdata.php?id=<?= $mhs['id']; ?>" class="btn btn-delete" onclick="return confirm('Yakin ingin menghapus data ini?')">
+                                    <i class="fas fa-trash"></i> Hapus
+                                </a>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+
+            <?php if (count($mahasiswas) == 0): ?>
+                <div class="alert alert-error" style="text-align: center;">
+                    <i class="fas fa-exclamation-triangle"></i> Tidak ada data mahasiswa. Silakan tambah data!
+                </div>
+            <?php endif; ?>
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
