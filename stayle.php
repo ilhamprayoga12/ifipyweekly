@@ -1061,3 +1061,105 @@ body {
 .auth-footer a:hover {
     text-decoration: underline;
 }
+
+/* ========== FIX AUTOFILL CHROME - VERSION 2 ========== */
+/* Solusi komprehensif untuk semua input yang terautofill */
+
+/* 1. Override background dan text color autofill dengan !important */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px #1a202c inset !important;
+    -webkit-text-fill-color: #f7fafc !important;
+    background-color: #1a202c !important;
+    background-clip: text !important;
+    caret-color: #f7fafc !important;
+}
+
+/* 2. Khusus untuk mode light */
+@media (prefers-color-scheme: light) {
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active,
+    textarea:-webkit-autofill,
+    textarea:-webkit-autofill:hover,
+    textarea:-webkit-autofill:focus,
+    select:-webkit-autofill,
+    select:-webkit-autofill:hover,
+    select:-webkit-autofill:focus {
+        -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important;
+        -webkit-text-fill-color: #1a202c !important;
+        background-color: #ffffff !important;
+        background-clip: text !important;
+        caret-color: #1a202c !important;
+    }
+}
+
+/* 3. Untuk form yang ada di .form-group dan .auth-card */
+.form-group input:-webkit-autofill,
+.form-group input:-webkit-autofill:hover,
+.form-group input:-webkit-autofill:focus,
+.auth-card .form-group input:-webkit-autofill,
+.auth-card .form-group input:-webkit-autofill:hover,
+.auth-card .form-group input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px #1a202c inset !important;
+    -webkit-text-fill-color: #f7fafc !important;
+    background-color: #1a202c !important;
+    background-clip: text !important;
+}
+
+/* 4. Mode light untuk form-group */
+@media (prefers-color-scheme: light) {
+    .form-group input:-webkit-autofill,
+    .form-group input:-webkit-autofill:hover,
+    .form-group input:-webkit-autofill:focus,
+    .auth-card .form-group input:-webkit-autofill,
+    .auth-card .form-group input:-webkit-autofill:hover,
+    .auth-card .form-group input:-webkit-autofill:focus {
+        -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important;
+        -webkit-text-fill-color: #1a202c !important;
+        background-color: #ffffff !important;
+        background-clip: text !important;
+    }
+}
+
+/* 5. Mencegah background autofill Chrome berubah */
+input:-webkit-autofill {
+    -webkit-background-clip: text !important;
+    transition: background-color 5000s ease-in-out 0s !important;
+}
+
+/* 6. Firefox fallback */
+input:-moz-autofill,
+textarea:-moz-autofill {
+    background-color: #1a202c !important;
+    color: #f7fafc !important;
+    box-shadow: 0 0 0px 1000px #1a202c inset !important;
+}
+
+@media (prefers-color-scheme: light) {
+    input:-moz-autofill,
+    textarea:-moz-autofill {
+        background-color: #ffffff !important;
+        color: #1a202c !important;
+        box-shadow: 0 0 0px 1000px #ffffff inset !important;
+    }
+}
+
+/* 7. Border tetap kelihatan saat autofill */
+.form-group input:-webkit-autofill {
+    border-color: #667eea !important;
+}
+
+.form-group input:-webkit-autofill:focus {
+    border-color: #667eea !important;
+    box-shadow: 0 0 0 3px rgba(102,126,234,0.2) !important;
+}
