@@ -11,12 +11,12 @@ cek_login();
 if (isset($_POST['submit'])) {
     if (tambahdata($_POST) > 0) {
         echo "<script>
-                alert('✅ Data berhasil ditambahkan!');
+                alert('Data berhasil ditambahkan!');
                 document.location.href = 'mahasiswa.php';
               </script>";
     } else {
         echo "<script>
-                alert('❌ Data gagal ditambahkan!');
+                alert('Data gagal ditambahkan!');
               </script>";
     }
 }
